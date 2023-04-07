@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>World Data Explorer</title>
+  <link rel="stylesheet" type="text/css" href="../WDT Submission 2/CSS/style.css">
+  <script src="../WDT Submission 2/JS/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+
+</head>
+
+<body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <script src="../WDT Submission 2/JS/autocomplete.js"></script>
+
+  <div class="video-container">
+    <video autoplay loop muted>
+      <source src="../WDT Submission 2/images/vidback.mp4" type="video/mp4">
+
+    </video>
+    <div style="align-items: center;margin-top: 250px; ">
+      <h2 style="font-size: 50px;">WELCOME!</h2>
+
+      <h2>SEARCH FOR COUNTRIES ALL OVER THE WORLD</h2>
+      <h2>World Data Explorer</h2>
+
+    </div>
+
+
+
+  </div>
+  <nav>
+    <div class="logo">
+      <a href="index.html">
+        <img src="../WDT Submission 2/images/Logo.png" alt="World Data Explorer logo">
+      </a>
+    </div>
+    <div class="title">
+      <a href="index.html" style="text-decoration: none;">
+        <h1>World Data Explorer</h1>
+      </a>
+    </div>
+    <div class="hamburger-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="../WDT Submission 2/HTML/about.html">ABOUT US</a></li>
+      <li><a href="../WDT Submission 2/PHP/contactform.php">BIOGRAPHY</a></li>
+      <li><a href="../WDT Submission 2/PHP/contactform.php">CONTACT US</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section class="search-section">
+
+      <div class="container" style="margin-top: -20px;">
+        <h1>COUNTRY INFORMATION</h1>
+        <label for="select-country">Select a country:</label>
+        <select id="select-country"></select>
+        <button id="search-button">Search</button>
+        <div id="output"></div>
+      </div>
+
+
+      <h2>COMPARISON OF WORLDWIDE COST OF LIVING</h2>
+
+      <div style="display: flex; justify-content: center;">
+        <div class="container" style="flex: 0 0 50%; display: flex; flex-direction: column; align-items: center;">
+          <h1>1 CAPITAL CITY</h1>
+          <div class="center" style="margin: 20px 0; display: flex; align-items: center; justify-content: center;">
+            <label for="city_name" style="margin-right: 10px;">City:</label>
+            <input type="text" id="city_name" name="city_name" placeholder="Enter a city name"
+              style="margin-right: 10px;">
+            <label for="country_name" style="margin-right: 10px;">Country:</label>
+            <input type="text" id="country_name" name="country_name" placeholder="Enter a country name"
+              style="margin-right: 10px;">
+            <button
+              onclick="getPrices('city_name', 'country_name', 'priceChart', 'tableContainer', 'cityInfoContainer')">Get
+              Cost of Living</button>
+            <div id="cityInfoContainer" style=" justify-content: center; color: rgb(0, 0, 0);"></div>
+
+            <div id="tableContainer" style="display: flex; justify-content: center;"></div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; margin: 0 20px;">
+
+          <h2 style="margin: 0; font-size: 48px;">VS</h2>
+
+        </div>
+
+        <div class="container" style="flex: 0 0 50%; display: flex; flex-direction: column; align-items: center;">
+          <h1>2 CAPITAL CITY</h1>
+          <div class="center" style="margin: 20px 0; display: flex; align-items: center; justify-content: center;">
+            <label for="city_name2" style="margin-right: 10px;">City:</label>
+            <input type="text" id="city_name2" name="city_name2" placeholder="Enter a city name"
+              style="margin-right: 10px;">
+            <label for="country_name2" style="margin-right: 10px;">Country:</label>
+            <input type="text" id="country_name2" name="country_name2" placeholder="Enter a country name"
+              style="margin-right: 10px;">
+            <button
+              onclick="getPrices('city_name2', 'country_name2', 'priceChart2', 'tableContainer2', 'cityInfoContainer2')">Get
+              Cost of Living</button>
+          </div>
+          <div id="cityInfoContainer2" style=" justify-content: center;color: rgb(0, 0, 0);"></div>
+
+
+          <div id="tableContainer2" style="display: flex; justify-content: center;"></div>
+        </div>
+      </div>
+      </br></br>
+    </section>
+
+    <div id="chartContainer" style="display: flex; justify-content: center; background-color: aliceblue;">
+      <canvas id="priceChart"></canvas>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: center; margin: 0 20px;">
+
+      <h2 style="margin: 0; font-size: 48px;">VS</h2>
+
+    </div>
+
+    <div id="chartContainer2" style="display: flex; justify-content : center;background-color: aliceblue;">
+      <canvas id="priceChart2"></canvas>
+    </div>
+    </section>
+    <button class="button" id="compare-btn"
+      style="background-color: white; height:90px; font-size: 20px; font-weight: bold; color: rgb(0, 194, 29); width: 40%; margin-left: 380px;">
+      CLICK HERE VIEW LIST OF CITIES & COUNTRIES & LOCATION</button>
+    <script>// Add an event listener to the compare button
+      document.getElementById("compare-btn").addEventListener("click", function () {
+        window.location.href = "compare.html";
+      });</script>
+
+    <section class="capital-cities-section">
+      <h2>The most famous capital cities in the world</h2>
+      <div class="slideshow-container">
+        <div class="slide">
+          <img src="../WDT Submission 2/images/paris.jpeg">
+          <div class="caption">Paris</div>
+        </div>
+        <div class="slide">
+          <img src="../WDT Submission 2/images/london.jpeg">
+          <div class="caption">London</div>
+        </div>
+        <div class="slide">
+          <img src="../WDT Submission 2/images/japan.jpg">
+          <div class="caption">Tokyo</div>
+        </div>
+        <div class="slide">
+          <img src="../WDT Submission 2/images/italy.jpg">
+          <div class="caption">Italy</div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="comparison-section">
+      </br></br></br></br>
+      <h2>Top countries with highest cost of living in the world</h2>
+      </br>
+      <table>
+        <thead>
+          <tr>
+            <th>RANK</th>
+            <th>Country</th>
+            <th>Cost Index</th>
+            <th>Monthly Income</th>
+            <th>Purchasing Power Index</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Bermuda</td>
+            <td>157.6</td>
+            <td> 10,206 USD </td>
+            <td>109.6</td>
+
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Switzerland</td>
+            <td>142.4</td>
+            <td> 7,550 USD </td>
+            <td>89.7</td>
+
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Cayman Islands</td>
+            <td>137.9 5</td>
+            <td>157 USD</td>
+            <td>63.2</td>
+
+          </tr>
+          <tr style="text-align: center;">
+            <td><a href="../WDT Submission 2/HTML/compare.html">View more</a></td>
+            <td><a href="../WDT Submission 2/HTML/compare.html">View more</a></td>
+            <td><a href="../WDT Submission 2/HTML/compare.html">View more</a></td>
+            <td><a href="../WDT Submission 2/HTML/compare.html">View more</a></td>
+            <td><a href="../WDT Submission 2/HTML/compare.html">View more</a></td>
+          </tr>
+          <!-- add more rows here -->
+
+        </tbody>
+
+      </table>
+    </section>
+
+
+  </main>
+  <section>
+    <h2>Filter world's continents on the map</h2>
+    <div>
+      <div style="width: 100%; height: 450px; ">
+        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1J52KVsiePHQ4Lu77aIJpd6fIz_pFd2g&ehbc=2E312F"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+
+  </section>
+
+  </br>
+  <footer style="margin-left: 100px;">
+    <div class="footer-content">
+      <a href="index.html">
+        <div class="logo">
+          <img src="../WDT Submission 2/images/Logo.png" alt="World Data Explorer logo">
+        </div>
+
+      </a>
+      <a href="index.html" style="text-decoration: none;">
+        <div class="title" style="color:white;">
+          <h1>World Data Explorer</h1>
+        </div>
+      </a>
+      <div>
+        <h3>Useful Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="../WDT Submission 2/HTML/about.html">About</a></li>
+          <li><a href="../WDT Submission 2/PHP/contactform.php">Biography</a></li>
+          <li><a href="../WDT Submission 2/PHP/contactform.php">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <p>&copy; Copyright 2023 | All Rights Reserved</p>
+
+  </footer>
+
+
+  <script>
+    
+    //Menu javascript codes
+    function initializeHamburgerMenu() {
+      const hamburgerMenu = document.querySelector('.hamburger-menu');
+      const navLinks = document.querySelector('.nav-links');
+
+      hamburgerMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('nav-active');
+      });
+    }
+
+    initializeHamburgerMenu();
+  </script>
+  
+
+
+</body>
+
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Cost of Living Data</title>
+
+  <link rel="stylesheet" type="text/css" href="../CSS/style.css">
+ 
+</head>
+
+<body>
+  <nav>
+    <div class="logo">
+      <a href="../index.html">
+        <img src="../images/Logo.png" alt="World Data Explorer logo">
+      </a>
+    </div>
+    <div class="title">
+      <a href="../index.html" style="text-decoration: none;">
+        <h1>World Data Explorer</h1>
+      </a>
+    </div>
+    <div class="hamburger-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="../index.html">HOME</a></li>
+      <li><a href="about.html">ABOUT US</a></li>
+      <li><a href="../PHP/contactform.php">BIOGRAPHY</a></li>
+      <li><a href="../PHP/contactform.php">CONTACT US</a></li>
+    </ul>
+  </nav>
+  </br></br></br></br>
+
+
+  <h1 style="color: rgb(255, 255, 255); text-align: center;">LIST OF CITIES & COUNTRIES & LOCATION</h1>
+  <div>
+    <h3>SEARCH</h3>
+  </div>
+
+  <input type="text" id="countrySearch" placeholder="Search by country name" style=" margin-left: 500px;">
+  <table id="cities-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>City Name</th>
+        <th>Country Name</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+  </br>
+  <footer style="margin-left: 100px;">
+    <div class="footer-content">
+      <a href="../index.html">
+        <div class="logo">
+          <img src="../images/Logo.png" alt="World Data Explorer logo">
+        </div>
+
+      </a>
+      <a href="../index.html" style="text-decoration: none;">
+        <div class="title" style="color:white;">
+          <h1>World Data Explorer</h1>
+        </div>
+      </a>
+      <div>
+        <h3>Useful Links</h3>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../HTML/about.html">About</a></li>
+          <li><a href="../PHP/contactform.php">Biography</a></li>
+          <li><a href="../PHP/contactform.php">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <p>&copy; Copyright 2023 | All Rights Reserved</p>
+
+  </footer>
+
+  <script>
+    const options = {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': '7fe617bc83msh7ca644b756c680ap1fdea2jsna1afc3a4e67b',
+        'X-RapidAPI-Host': 'cost-of-living-and-prices.p.rapidapi.com'
+      }
+    };
+
+    // fetch the list of cities from the API
+    fetch('https://cost-of-living-and-prices.p.rapidapi.com/cities', options)
+      .then(response => response.json())
+      .then(response => {
+        const citiesTable = document.querySelector('#cities-table tbody');
+        response.cities.forEach(city => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+              <td>${city.city_id}</td>
+              <td>${city.city_name}</td>
+              <td>${city.country_name}</td>
+              <td>${city.lat}</td>
+              <td>${city.lng}</td>
+            `;
+          citiesTable.appendChild(row);
+        });
+      })
+      .catch(err => console.error(err));
+       // Create a function to display the filtered cities in the table
+  function displayFilteredCities(cities) {
+    const citiesTable = document.querySelector('#cities-table tbody');
+    citiesTable.innerHTML = '';
+
+    cities.slice(0, 20).forEach(city => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${city.city_id}</td>
+        <td>${city.city_name}</td>
+        <td>${city.country_name}</td>
+        <td>${city.lat}</td>
+        <td>${city.lng}</td>
+      `;
+      citiesTable.appendChild(row);
+    });
+  }
+
+  // Fetch the list of cities from the API
+  let allCities = [];
+  fetch('https://cost-of-living-and-prices.p.rapidapi.com/cities', options)
+    .then(response => response.json())
+    .then(response => {
+      allCities = response.cities;
+      displayFilteredCities(allCities);
+    })
+    .catch(err => console.error(err));
+
+  // Filter the table based on the user's input
+  const countrySearch = document.getElementById('countrySearch');
+  countrySearch.addEventListener('input', () => {
+    const searchValue = countrySearch.value.trim().toLowerCase();
+    const filteredCities = allCities.filter(city => city.country_name.toLowerCase().includes(searchValue));
+    displayFilteredCities(filteredCities);
+  });
+
+  </script>
+<script>
+    
+  //Menu javascript codes
+  function initializeHamburgerMenu() {
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburgerMenu.addEventListener('click', () => {
+      navLinks.classList.toggle('nav-active');
+    });
+  }
+
+  initializeHamburgerMenu();
+</script>
+
+</body>
+
+</html>

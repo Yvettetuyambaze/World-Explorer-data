@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>World Data Explorer</title>
+        <link rel="stylesheet" type="text/css" href="../CSS/style.css">
+        <script src="../JS/script.js"></script>
+		<style>
+			
+			
+			</style>
+    </head>
+    
+<body>
+	<nav>
+		<div class="logo">
+		  <a href="../index.html">
+			<img src="../images/Logo.png" alt="World Data Explorer logo">
+		  </a>
+		</div>
+		<div class="title">
+		  <a href="../index.html" style="text-decoration: none;">
+			<h1>World Data Explorer</h1>
+		  </a>
+		</div>
+		<div class="hamburger-menu">
+		  <span class="bar"></span>
+		  <span class="bar"></span>
+		  <span class="bar"></span>
+		</div>
+		<ul class="nav-links">
+		  <li><a href="../index.html">HOME</a></li>
+		  <li><a href="about.html">ABOUT US</a></li>
+		  <li><a href="../PHP/contactform.php">BIOGRAPHY</a></li>
+		  <li><a href="../PHP/contactform.php">CONTACT US</a></li>
+		</ul>
+	  </nav>
+	</br></br></br></br>
+
+	<div class="about-section" style="width: 60%; margin-left: 250px;">
+		<h1>ABOUT US </h1>
+		<p>World Data Explorer is a website that lets users explore and compare the cost of living in capital cities
+			 around the world. Users can select a continent, country, or capital city to view background information,
+			  maps, and reliable cost-of-living data.</p>
+	  </div>
+	</br>
+
+	<h2 style="text-align:center">OUR WORK</h2>
+	<div class="row">
+	  <div class="column">
+		<div class="card">
+		  <img src="../images/random-country-fb.jpg" alt="Jane" style="width:100%">
+		  <div class="container">
+			<h2 class="title">SEARCH FOR COUNTRIES</h2>
+			<button class="button" id="search-btn">Search Countries</button>
+		  </div>
+		</div>
+	  </div>
+	
+	  <div class="column">
+		<div class="card">
+		  <img src="../images/LivingAroundWorld.jpg" alt="Mike" style="width:100%">
+		  <div class="container">
+			<h2 class="title">COMPARE COST OF LIVING</h2>
+			<button class="button" id="compare-btn">Compare Cost of living</button>
+		  </div>
+		</div>
+	  </div>
+	
+	  <div class="column">
+		<div class="card">
+		  <img src="../images/wprintable-maps.jpg" alt="John" style="width:100%">
+		  <div class="container">
+			<h2 class="title">LOCATE CITIES ON MAP</h2>
+			<button class="button" id="map-btn">Search on Map</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	
+	<script>
+	  // Add an event listener to the search button
+	  document.getElementById("search-btn").addEventListener("click", function() {
+		window.location.href = "../index.html";
+	  });
+	
+	  // Add an event listener to the compare button
+	  document.getElementById("compare-btn").addEventListener("click", function() {
+		window.location.href = "compare.html";
+	  });
+	
+	  // Add an event listener to the map button
+	  document.getElementById("map-btn").addEventListener("click", function() {
+		window.location.href = "../index.html";
+	  });
+	</script>
+	
+	<table style="width:60%; margin-left: 250px;">
+		<thead>
+			<tr>
+				<th colspan="3"><h1>OUR GOALS</h1></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				
+				<td><strong>Explore capital cities all over the world.</strong></td>
+			</tr>
+			<tr>
+				
+				<td><strong>Compare the cost of living in different capital cities.</strong></td>
+			</tr>
+			<tr>
+				
+				<td><strong>View background information, maps, and reliable cost-of-living data for different capital cities.</strong></td>
+			</tr>
+		</tbody>
+	</table>
+	  
+	 
+    
+</br>
+<footer style="margin-left: 100px;">
+	<div class="footer-content">
+	<a href="../index.html">
+		<div class="logo">
+		  <img src="../images/Logo.png" alt="World Data Explorer logo">
+		</div>
+		
+	  </a>
+	  <a href="../index.html" style="text-decoration: none;">
+		<div class="title" style="color:white;">
+		  <h1>World Data Explorer</h1>
+		</div>
+	  </a>
+	  <div>
+		<h3>Useful Links</h3>
+		<ul>
+		  <li><a href="../index.html">Home</a></li>
+		  <li><a href="about.html">About</a></li>
+		  <li><a href="../PHP/contactform.php">Biography</a></li>
+		  <li><a href="../PHP/contactform.php">Contact Us</a></li>
+		</ul>
+	</div>		
+	
+	  <p>&copy; Copyright 2023 | All Rights Reserved</p>
+	
+  </footer>
+  <script>
+    
+	//Menu javascript codes
+	function initializeHamburgerMenu() {
+	  const hamburgerMenu = document.querySelector('.hamburger-menu');
+	  const navLinks = document.querySelector('.nav-links');
+  
+	  hamburgerMenu.addEventListener('click', () => {
+		navLinks.classList.toggle('nav-active');
+	  });
+	}
+  
+	initializeHamburgerMenu();
+  </script>
+</body>
+</html>
